@@ -1,0 +1,241 @@
+{
+  "name": "medi-course-management",
+  "reactions": {
+    "createHeader": {
+      "onMessage": "{$applicationId}/layout/created",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/layout/appendTemplateContent",
+        "commandPayload": {
+          "templateName": "header",
+          "parentId": "medi-course-management/layout"
+        }
+      }
+    },
+    "createHeaderMenu": {
+      "onMessage": "{$applicationId}/layout/header/created",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/layout/appendTemplateContent",
+        "commandPayload": {
+          "templateName": "menu",
+          "parentId": "medi-course-management/layout/header",
+          "slotName": "menu"
+        }
+      }
+    },
+    "createnHeaderMenuTitle": {
+      "onMessage": "{$applicationId}/layout/header/menu/created",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/layout/changeSlotData",
+        "commandPayload": {
+          "parentId": "medi-course-management/layout/header/menu",
+          "data": {
+            "title": {
+              "lng_key": "classes_title",
+              "id": "medi-course-management/layout/header/menu/title",
+              "value": "Bildungsgänge"
+            }
+          }
+        }
+      }
+    },
+    "fetchHeaderMenuItems": {
+      "onMessage": "{$applicationId}/repository/created",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/repository/fetchData",
+        "commandPayload": {
+          "projection": "medi-course-management-backend/projection/categoryList/parentIdOrId/333/projectionType/keyValueList",
+          "next": {
+            "command": "medi-course-management/layout/changeSlotData",
+            "commandPayload": {
+              "parentId": "medi-course-management/layout/header/menu"
+            }
+          }
+        }
+      }
+    },
+    "createContentContainer": {
+      "onMessage": "{$applicationId}/repository/created",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/layout/appendTemplateContent",
+        "commandPayload": {
+          "templateName": "content-container",
+          "parentId": "medi-course-management/layout"
+        }
+      }
+    },
+    "setInstitutionMetadata": {
+      "onMessage": "{$applicationId}/layout/header/menu/items/clicked",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/repository/fetchData",
+        "commandPayload": {
+          "projection": "medi-course-management-backend/projection/categoryList/parentIdOrId/334/projectionType/object",
+          "next": {
+            "command": "medi-course-management/layout/changeSlotData",
+            "commandPayload": {
+              "parentId": "medi-course-management/layout/content-container"
+            }
+          }
+        }
+      }
+    },
+    "createContentContainerMenu": {
+      "onMessage": "{$applicationId}/layout/header/menu/items/clicked",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/layout/appendTemplateContent",
+        "commandPayload": {
+          "templateName": "menu",
+          "parentId": "medi-course-management/layout/content-container",
+          "slotName": "menu"
+        }
+      }
+    },
+    "createnContentContainerMenuTitle": {
+      "onMessage": "{$applicationId}/layout/content-container/menu/created",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/layout/changeSlotData",
+        "commandPayload": {
+          "parentId": "medi-course-management/layout/content-container/menu",
+          "data": {
+            "title": {
+              "lng_key": "cat_title",
+              "id": "medi-course-management/layout/content-container/menu/title",
+              "value": "Klassen"
+            }
+          }
+        }
+      }
+    },
+    "fetchContentContainerMenuItems": {
+      "onMessage": "{$applicationId}/layout/header/menu/items/clicked",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/repository/fetchData",
+        "commandPayload": {
+          "projection": "learnplaces/projectIdValueList",
+          "next": {
+            "command": "flux-learnplaces/layout/changeSlotData",
+            "commandPayload": {
+              "parentId": "flux-learnplaces/layout/content-container/menu"
+            }
+          }
+        }
+      }
+    },
+    "loadMap": {
+      "onMessage": "{$applicationId}/layout/content-container/menu/created",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/layout/appendTemplateContent",
+        "commandPayload": {
+          "templateName": "map",
+          "parentId": "flux-learnplaces/layout/content-container",
+          "slotName": "content"
+        }
+      }
+    },
+    "setDefaultLocation": {
+      "onMessage": "{$applicationId}/layout/content-container/map/created",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/repository/fetchData",
+        "commandPayload": {
+          "projection": "defaultLocation/projectObject",
+          "next": {
+            "command": "flux-learnplaces/layout/changeSlotData",
+            "commandPayload": {
+              "parentId": "flux-learnplaces/layout/content-container/map"
+            }
+          }
+        }
+      }
+    },
+    "setCourseLocation": {
+      "onMessage": "{$applicationId}/layout/header/menu/items/clicked",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/repository/fetchData",
+        "commandPayload": {
+          "projection": "courseLocation/projectObject",
+          "next": {
+            "command": "flux-learnplaces/layout/changeSlotData",
+            "commandPayload": {
+              "parentId": "flux-learnplaces/layout/content-container/map"
+            }
+          }
+        }
+      }
+    },
+    "setLearnplaceLocation": {
+      "onMessage": "{$applicationId}/layout/content-container/menu/items/clicked",
+      "process": "handle",
+      "payload": {
+        "command": "{$applicationId}/repository/fetchData",
+        "commandPayload": {
+          "projection": "learnplaceLocation/projectObject",
+          "next": {
+            "command": "flux-learnplaces/layout/changeSlotData",
+            "commandPayload": {
+              "parentId": "flux-learnplaces/layout/content-container/map"
+            }
+          }
+        }
+      }
+    },
+    "changeCoordinates": {
+      "onMessage": "{$applicationId}/TODO",
+      "process": "handle",
+      "payload": {
+        "command": "flux-learnplaces/layout/changeSlotData",
+        "commandPayload": {
+          "parentId": "flux-learnplaces/layout/content-container/map",
+          "data": {
+            "marker": {
+              "1": {
+                "longitude": {
+                  "name":  "longitude",
+                  "value": "30"
+                },
+                "latitude": {
+                  "name":  "latitude",
+                  "value": "30"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "changeMapMarkers": {
+      "onMessage": "{$applicationId}/layout/TODO/menu/items/clicked",
+      "process": "handle",
+      "payload": {
+        "command": "flux-learnplaces/layout/changeSlotData",
+        "commandPayload": {
+          "parentId": "flux-learnplaces/layout/content-container/map",
+          "data": {
+            "marker": {
+              "1": {
+                "latitude": {
+                  "name":  "latitude",
+                  "value": "51.50"
+                },
+                "longitude": {
+                  "name":  "longitude",
+                  "value": "-0.083"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
