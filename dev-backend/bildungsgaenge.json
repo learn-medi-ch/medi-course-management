@@ -1,0 +1,14 @@
+{
+  "items": {
+    "RS": {
+      "id": "RS",
+      "onClick": "refId/RS",
+      "value": "RS"
+    },
+    "OT": {
+      "id": "OT",
+      "idType": "refId",
+      "value": "OT"
+    }
+  }
+}

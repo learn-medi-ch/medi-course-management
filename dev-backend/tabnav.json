@@ -1,0 +1,12 @@
+{
+  "items": {
+    "classes": {
+      "id": "classes",
+      "value": "Klassen"
+    },
+    "committeea": {
+      "id": "committees",
+      "value": "Gremien"
+    }
+  }
+}
