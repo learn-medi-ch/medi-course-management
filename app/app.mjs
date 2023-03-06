@@ -21,11 +21,10 @@ async function app() {
                 headers,
             };
 
-            console.log(["http://",server.host,":",server.port,actionPath].join(""));
-
+            //todo - path by config
             return new Promise((resolve, reject) => {
                 const proxyRequest = http.request(
-                    ["http://",server.host,":",server.port,actionPath].join(""),
+                    ["https://",server.host,":",server.port,"/flux-ilias-rest-api-proxy/medi-eco-backend",actionPath].join(""),
                     options,
                     (proxyResponse) => {
                         const chunks = [];
