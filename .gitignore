@@ -1,6 +1,6 @@
 /*
 !app
-app/
+app/*
 !app/bin
 !app/build
 !app/config

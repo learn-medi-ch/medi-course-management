@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema/medi-course-management-frontend-config-schema.json",
+  "name": "medi-course-management-frontend",
+  "inboundsConfig": {
+    "httpBindingConfig": {
+      "server": {
+        "host": "${SERVER_HOST}",
+        "port": "${SERVER_PORT}"
+      },
+      "staticFilesPath": "/public",
+      "policies": null,
+      "routes": {
+        "static": {
+          "/index.html": {
+            "contentType": "text/html"
+          },
+          "/main.mjs": {
+            "contentType": "application/javascript"
+          },
+          "/**/*.mjs": {
+            "contentType": "application/javascript"
+          },
+          "/**/*.ttf": {
+            "contentType": "application/font-ttf"
+          },
+          "/**/*.wof": {
+            "contentType": "application/font-woff"
+          }
+        },
+        "api": {
+          "/api/{pageName}/readPageStructure": {
+            "contentType": "application/json",
+            "parameterNames": ["pageName"],
+            "actionName": "readPageStructure",
+            "actionType": "requestHandler"
+          }
+        }
+      }
+    }
+  },
+  "apiConfig": {
+    "outbounds": {
+      "proxyRequestHandler": {
+        "actionName": "handleRequest",
+        "parametersMapping": {
+          "path": "path"
+        }
+      }
+    }
+  },
+  "outboundsConfigs": {
+    "proxyRequestHandler": {
+      "server": {
+        "port": "${BACKEND_SERVER_PORT}",
+        "host": "${BACKEND_SERVER_HOST}"
+      },
+      "apiBasePath": "/api"
+    }
+  }
+}
