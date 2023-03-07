@@ -24,7 +24,7 @@ async function app() {
             //todo - path by config
             return new Promise((resolve, reject) => {
                 const proxyRequest = http.request(
-                    ["https://",server.host,":",server.port,"/flux-ilias-rest-api-proxy/medi-eco-backend",actionPath].join(""),
+                    ["http://",server.host,":",server.port,actionPath].join(""),
                     options,
                     (proxyResponse) => {
                         const chunks = [];

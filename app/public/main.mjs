@@ -1,6 +1,7 @@
 import {FluxEcoUiApi} from "./flux-eco-ui/src/Adapters/Api/FluxEcoUiApi.mjs";
 
-const basePath = "http://" + window.location.hostname  + ":" + window.location.port + "/api"
+//todo
+const basePath = "https://" + window.location.hostname  + ":" + window.location.port + "/api"
 
 const api = await FluxEcoUiApi.new();
 

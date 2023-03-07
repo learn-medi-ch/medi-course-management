@@ -8,7 +8,13 @@
         "port": "${SERVER_PORT}"
       },
       "staticFilesPath": "/public",
-      "policies": null,
+      "policies": {
+        "authenticatedUsersOnly": {
+          "path": "/api/inaktiv",
+          "allowedHeaders": "${SERVER_REQUIRED_HEADERS}",
+          "allowedIps": "${SERVER_ALLOWED_IPS}"
+        }
+      },
       "routes": {
         "static": {
           "/index.html": {
